@@ -1,0 +1,17 @@
+export { colors, removeColor } from './color.js';
+export { spawnAsync } from './commands.js';
+export { NodeDependency, NodeDependencyType, addPackageJsonDependency, getPackageJsonDependency, installDependencies, removePackageJsonDependency } from './dependencies.js';
+export { getEOL } from './eol.js';
+export { InsertionIndex, JSONFile, JSONPath } from './json-file.js';
+export { addElementToPackageJson, addScriptToPackageJson } from './package-json.js';
+export { Location, parseName } from './parse-name.js';
+export { askChoices, askConfirmation, askQuestion } from './prompt.js';
+export { Spinner } from './spinner.js';
+export { addShortImportToTsConfig } from './AST/Modify/add-short-import.js';
+export { addFilesToTree } from './files.js';
+export { installAsDevCommands, installCommands, uninstallCommands } from './package-manager.js';
+import 'ansi-colors';
+import 'child_process';
+import '@angular-devkit/schematics';
+import '@angular-devkit/core';
+import 'inquirer';

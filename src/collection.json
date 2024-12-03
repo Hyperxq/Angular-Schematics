@@ -1,0 +1,33 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "builder-add": {
+      "description": "This schematic will be executed when use the command builder add [collection-name]",
+      "factory": "./builder-add/builder-add.factory#builderAddFactory",
+      "schema": "./builder-add/schema.json"
+    },
+    "ng-add": {
+      "description": "This schematic will be executed when use the command builder add [collection-name]",
+      "factory": "./builder-add/builder-add.factory#builderAddFactory",
+      "schema": "./builder-add/schema.json"
+    },
+    "jasmine-to-jest": {
+      "description": "This schematic migrate from jasmine setting to jest setting in angular workspaces",
+      "factory": "./builder-generate/jasmine-to-jest/jasmine-to-jest.factory#jasmineToJestFactory",
+      "schema": "./builder-generate/jasmine-to-jest/schema.json"
+    },
+    "ngrx-resource": {
+      "description": "This schematic will create a whole resource base on @ngrx/signals",
+      "factory": "./builder-generate/ngrx-resource/ngrx-resource.factory#ngrxResourceFactory",
+      "schema": "./builder-generate/ngrx-resource/schema.json",
+      "aliases": [
+        "resource"
+      ]
+    },
+    "scaffolding": {
+      "description": "This schematic will generate an specific architecture",
+      "factory": "./builder-generate/scaffolding/scaffolding.factory#scaffoldingFactory",
+      "schema": "./builder-generate/scaffolding/schema.json"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+
+export * from './<%= plural(dasherize(name)) %>.store';

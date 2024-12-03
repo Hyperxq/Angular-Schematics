@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "ngrx-resource",
+    "title": "NGRX Signal Resource",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The name of the resource.",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            },
+            "x-prompt": "What name would you like to use for the resource?"
+        }
+    }
+}

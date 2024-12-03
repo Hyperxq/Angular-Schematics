@@ -1,0 +1,60 @@
+import { inject, InjectionToken } from '@angular/core';
+import { <%= singular(classify(name)) %> } from '../models';
+import {
+  patchState,
+  signalStore,
+  withHooks,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
+import { <%= plural(classify(name)) %>Service } from '../services/<%= plural(camelize(name)) %>.service';
+import { lastValueFrom } from 'rxjs';
+
+type StoreState = {
+  <%= plural(camelize(name)) %>: <%= singular(classify(name)) %>[];
+};
+
+const initialState: StoreState = {
+  <%= plural(camelize(name)) %>: [],
+};
+
+const STORE_STATE = new InjectionToken<StoreState>('<%= plural(classify(name)) %>Store', {
+  factory: () => initialState,
+});
+
+export const <%= plural(classify(name)) %>Store = signalStore(
+  { providedIn: 'root' },
+  withState(() => inject(STORE_STATE)),
+  withMethods((store, <%= plural(camelize(name)) %>Service = inject(<%= plural(classify(name)) %>Service)) => ({
+    get<%= singular(classify(name)) %>(id: number) {
+      return store.<%= plural(camelize(name)) %>().find((<%= camelize(singular(name)) %>) => <%= camelize(singular(name)) %>.id === id);
+    },
+    async update<%= singular(classify(name)) %>(<%= camelize(singular(name)) %>: <%= classify(singular(name)) %>) {
+      await lastValueFrom(<%= plural(camelize(name)) %>Service.update<%= classify(singular(name)) %>(<%= camelize(singular(name)) %>));
+
+      patchState(store, ({ <%= plural(camelize(name)) %> }) => ({
+        <%= plural(camelize(name)) %>: <%= plural(camelize(name)) %>.map((r) =>
+          r.id === <%= camelize(singular(name)) %>.id ? { ...r, ...<%= camelize(singular(name)) %> } : r
+        ),
+        isLoading: false,
+      }));
+    },
+    async create<%= singular(classify(name)) %>(<%= camelize(singular(name)) %>: <%= classify(singular(name)) %>) {
+      await lastValueFrom(<%= plural(camelize(name)) %>Service.add<%= classify(singular(name)) %>(<%= camelize(singular(name)) %>));
+
+      patchState(store, ({ <%= plural(camelize(name)) %> }) => ({
+        <%= plural(camelize(name)) %>: <%= plural(camelize(name)) %>.map((r) =>
+          r.id === <%= camelize(singular(name)) %>.id ? { ...r, ...<%= camelize(singular(name)) %> } : r
+        ),
+        isLoading: false,
+      }));
+    },
+  })),
+  withHooks({
+    async onInit(store, <%= plural(camelize(name)) %>Service = inject(<%= plural(classify(name)) %>Service)) {
+      const <%= plural(camelize(name)) %> = await lastValueFrom(<%= plural(camelize(name)) %>Service.getAll<%= plural(classify(name)) %>());
+
+      patchState(store, { <%= plural(camelize(name)) %> });
+    },
+  })
+);

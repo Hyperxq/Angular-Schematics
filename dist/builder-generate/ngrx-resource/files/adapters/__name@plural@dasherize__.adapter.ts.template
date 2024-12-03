@@ -1,0 +1,3 @@
+import { <%= singular(classify(name)) %> } from '../models';
+
+export const <%= singular(classify(name)) %>Adapter = (<%= plural(camelize(name)) %>: <%= singular(classify(name)) %>[]): <%= singular(classify(name)) %>[] => <%= plural(camelize(name)) %>;
