@@ -1,8 +1,8 @@
 {
   "name": "@pbuilder/angular",
-  "author": "",
-  "version": "0.0.2",
-  "description": "A blank schematics",
+  "author": "Hyperxq",
+  "version": "0.0.3",
+  "description": "A collection of Angular schematics to automate project setup, migrate testing frameworks, and generate scalable architectures with best practices.",
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
     "test": "npm run build && jasmine src/**/*_spec.js",
@@ -15,9 +15,16 @@
     "new:schematic": "builder g @pbuilder/sm sc"
   },
   "keywords": [
-    "schematics"
+    "schematics",
+    "angular",
+    "Project Builder"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hyperxq/Angular-Schematics"
+  },
+  "private": false,
   "schematics": "./collection.json",
   "dependencies": {
     "@angular-devkit/core": "^17.2.0",
