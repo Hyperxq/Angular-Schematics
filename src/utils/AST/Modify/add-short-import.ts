@@ -1,7 +1,16 @@
+import { parse, stringify } from "comment-json";
+
 /**
  * Behavior options for handling existing paths.
  */
 type ExistingPathBehavior = 'update' | 'skip' | 'merge';
+
+
+interface TsConfig {
+  compilerOptions?: {
+    paths?: { [key: string]: string[] };
+  };
+}
 
 /**
  * Adds or updates a short import path in the given tsconfig content.
@@ -22,7 +31,7 @@ export function addShortImportToTsConfig(
 
   // Parse the tsconfig content
   try {
-    tsconfig = JSON.parse(tsconfigContent);
+    tsconfig = parse(tsconfigContent) as TsConfig;
   } catch (error) {
     throw new Error(`Failed to parse tsconfig content: ${error}`);
   }
@@ -66,5 +75,5 @@ export function addShortImportToTsConfig(
   }
 
   // Return the updated tsconfig content as a formatted JSON string
-  return JSON.stringify(tsconfig, null, 2);
+  return stringify(tsconfig, null, 2);;
 }

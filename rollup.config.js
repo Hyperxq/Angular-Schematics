@@ -56,6 +56,7 @@ const baseExternal = [
   '@angular-devkit/schematics',
   '@angular-devkit/core',
   'pluralize',
+  'comment-json',
   'winston',
   'winston-console-format',
   'jsonc-parser',

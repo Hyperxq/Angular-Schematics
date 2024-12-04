@@ -1,7 +1,7 @@
 {
   "name": "@pbuilder/angular",
   "author": "Hyperxq",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A collection of Angular schematics to automate project setup, migrate testing frameworks, and generate scalable architectures with best practices.",
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
@@ -30,6 +30,7 @@
     "@angular-devkit/core": "^17.2.0",
     "@angular-devkit/schematics": "^17.2.0",
     "ansi-colors": "4.1.3",
+    "comment-json": "^4.2.5",
     "inquirer": "8.2.6",
     "jsonc-parser": "3.2.1",
     "node-emoji": "2.1.0",

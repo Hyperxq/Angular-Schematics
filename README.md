@@ -144,6 +144,48 @@ ng generate scaffolding
 
 - A directory structure and files for the selected architecture type will be created.
 
+This will create these directories and files:
+
+```
+    └── 📁adapters
+        └── index.ts
+    └── 📁components
+        └── index.ts
+    └── 📁models
+        └── index.ts
+    └── 📁pipes
+        └── index.ts
+    └── 📁services
+        └── index.ts
+    └── 📁stores
+        └── index.ts
+```
+
+Also, this schematics will add the following to the `tsconfig.json` file:
+
+```json
+{
+  "paths": {
+    "@adapters": [
+      "./src/app/adapters/index.ts"
+    ],
+    "@components": [
+      "./src/app/components/index.ts"
+    ],
+    "@models": [
+      "./src/app/models/index.ts"
+    ],
+    "@pipes": [
+      "./src/app/pipes/index.ts"
+    ],
+    "@services": [
+      "./src/app/services/index.ts"
+    ],
+    "@stores": [
+      "./src/app/stores/index.ts"
+    ]
+  }
+}
 ---
 
 ## Notes
