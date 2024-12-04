@@ -7,22 +7,44 @@
  */
 
 import { chain, Rule, Tree } from '@angular-devkit/schematics';
-import { updateWorkspace } from '../utils/Angular';
+import { getDefaultProjectName, getProject, readWorkspace, updateWorkspace } from '../utils/Angular';
 import { spawnAsync } from '../utils';
-import { createSourceFile, ScriptTarget, forEachChild, isImportDeclaration, isVariableStatement, isVariableDeclaration, isObjectLiteralExpression, isPropertyAssignment, isArrayLiteralExpression, isCallExpression } from 'typescript';
+import {
+  createSourceFile,
+  ScriptTarget,
+  forEachChild,
+  isImportDeclaration,
+  isVariableStatement,
+  isVariableDeclaration,
+  isObjectLiteralExpression,
+  isPropertyAssignment,
+  isArrayLiteralExpression,
+  isCallExpression,
+} from 'typescript';
+import { normalize } from '@angular-devkit/core';
+import { join } from 'path';
 
-export function builderAddFactory(): Rule {
-  return async () => {
-    await spawnAsync(
-      "ng",
-      ['add', '@ngrx/signals@latest --skip-confirmation'],
-      {
+export function builderAddFactory({ skipNgrx }: { skipNgrx: boolean }): Rule {
+  return async (tree: Tree) => {
+    if (!skipNgrx) {
+      await spawnAsync('ng', ['add', '@ngrx/signals@latest --skip-confirmation'], {
         cwd: process.cwd(),
         stdio: 'inherit',
         shell: true,
-      },
-    );
-    return chain([addCliConfig(), updateAppConfig('src/app/app.config.ts')]);
+      });
+    }
+
+    const rules = [addCliConfig()];
+    const workspace = await readWorkspace(tree);
+    const projectName = getDefaultProjectName(workspace);
+    const { sourceRoot, prefix } = getProject(workspace, projectName);
+    const configPath = normalize(join(sourceRoot, prefix, 'app.config.ts'));
+
+    if (tree.exists(configPath)) {
+      rules.push(updateAppConfig(configPath));
+    }
+
+    return chain(rules);
   };
 }
 

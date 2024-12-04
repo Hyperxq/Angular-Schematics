@@ -1,7 +1,0 @@
-export interface <%= singular(classify(name)) %> {
-  id: Readonly<number>;
-}
-
-export type Create<%= singular(classify(name)) %> = Omit<<%= singular(classify(name)) %>, 'id'>;
-export type Update<%= singular(classify(name)) %> = Omit<Partial<<%= singular(classify(name)) %>>, ''>;
-export type Delete<%= singular(classify(name)) %> = Pick<<%= singular(classify(name)) %>, 'id'>;

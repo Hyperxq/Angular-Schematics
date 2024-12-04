@@ -1,7 +1,14 @@
 {
-    "$schema": "http://json-schema.org/schema",
-    "$id": "BuilderAdd",
-    "title": "Builder Add",
-    "type": "object",
-    "properties": {}
+  "$schema": "http://json-schema.org/schema",
+  "$id": "BuilderAdd",
+  "title": "Builder Add",
+  "type": "object",
+  "properties": {
+    "skipNgrx": {
+      "type": "boolean",
+      "description": "Skip ngrx/signal config.",
+      "default": false,
+      "x-prompt": "Would you like to skip the ngrx/signal config?"
+    }
+  }
 }
