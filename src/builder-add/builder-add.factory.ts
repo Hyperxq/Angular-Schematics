@@ -9,18 +9,6 @@
 import { chain, Rule, Tree } from '@angular-devkit/schematics';
 import { getDefaultProjectName, getProject, readWorkspace, updateWorkspace } from '../utils/Angular';
 import { spawnAsync } from '../utils';
-import {
-  createSourceFile,
-  ScriptTarget,
-  forEachChild,
-  isImportDeclaration,
-  isVariableStatement,
-  isVariableDeclaration,
-  isObjectLiteralExpression,
-  isPropertyAssignment,
-  isArrayLiteralExpression,
-  isCallExpression,
-} from 'typescript';
 import { normalize } from '@angular-devkit/core';
 import { join } from 'path';
 import {
@@ -47,7 +35,7 @@ export function builderAddFactory({ skipNgrx }: { skipNgrx: boolean }): Rule {
 
     if (tree.exists(configPath)) {
       rules.push(updateAppConfig(configPath));
-      rules.push(updateZoneChangeDetection(configPath));
+      // rules.push(updateZoneChangeDetection(configPath));
     }
 
     return chain(rules);
@@ -102,11 +90,11 @@ function updateAppConfig(filePath: string): Rule {
   return updateAppConfigWithProviders(filePath, configs);
 }
 
-export function updateZoneChangeDetection(filePath: string): Rule {
-  return replaceProviderAndImport(
-    filePath,
-    `provideZoneChangeDetection({ eventCoalescing: true })`,
-    `provideExperimentalZonelessChangeDetection()`,
-    '@angular/core',
-  );
-}
+// export function updateZoneChangeDetection(filePath: string): Rule {
+//   return replaceProviderAndImport(
+//     filePath,
+//     `provideZoneChangeDetection({ eventCoalescing: true })`,
+//     `provideExperimentalZonelessChangeDetection()`,
+//     '@angular/core',
+//   );
+// }
