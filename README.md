@@ -186,6 +186,8 @@ Also, this schematics will add the following to the `tsconfig.json` file:
     ]
   }
 }
+```
+
 ---
 
 ## Notes
